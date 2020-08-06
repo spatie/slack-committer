@@ -18,4 +18,4 @@ Later in your workflow:
     env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
         SLACK_MESSAGE: "You should fix this: ${{ steps.slack-committer.outputs.username }}"
-``
+```
