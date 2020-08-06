@@ -7,7 +7,7 @@ This action transforms the committer of the current commit into a slack friendly
 ```yaml
 -   name: Resolve slack committer
     id: slack-committer
-    uses: spatie/slack-committer@v1
+    uses: spatie/slack-committer@1.0.0
 ```
 
 Later in your workflow:
