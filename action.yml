@@ -1,12 +1,12 @@
-name: 'Resolve slack committer username'
+name: 'Resolve github user to slack userID or channelID'
 description: 'Get the slack username of the current committer'
 inputs:
-  USER_MAPPING:
+  user-mapping:
     description: 'JSON mapping of github username to slack user IDs (see https://www.workast.com/help/article/how-to-find-a-slack-user-id/ )'
     required: true
 outputs:
-    username:
-        description: 'The slack user ID of the committer'
+  username:
+    description: 'The slack user ID of the committer'
 runs:
-    using: 'node16'
-    main: 'index.js'
+  using: 'node16'
+  main: 'index.js'
