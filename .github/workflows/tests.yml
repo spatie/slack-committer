@@ -1,0 +1,19 @@
+name: Test
+on:
+  pull_request:
+  workflow_dispatch:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: yarn install
+      - name: Determine committer
+        id: committer
+        uses: ./
+        with:
+          user-mapping: "{\"Penchef\":\"FOO\",\"default\":\"Bar\"}"
+          # payload: "{\"key\":\"value\",\"foo\":\"bar\"}"
+      - name: verify
+        run: echo ${{ steps.committer.outputs.username }}"
+

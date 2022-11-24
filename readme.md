@@ -11,6 +11,8 @@ This action transforms the committer of the current commit into a slack friendly
 -   name: Resolve slack committer
     id: slack-committer
     uses: spatie/slack-committer@1.0.0
+    with:
+        USER_MAPPING: '{ "rubenvanassche": "UCK2H2Z6V" }'
 ```
 
 Later in your workflow:
@@ -25,4 +27,4 @@ Later in your workflow:
 
 ## Adding a new team member
 
-You can add a new team member by updating the `index.js` file. You'll need a Slack user id next to the name of the team member, that id can be found as [such](https://help.workast.com/hc/en-us/articles/360027461274-How-to-find-a-Slack-user-ID). Don't forget to commit the action with the new member and tag a new release!  
+You can add a new team member by updating the `index.js` file. You'll need a Slack user id next to the name of the team member, that id can be found as [such](https://help.workast.com/hc/en-us/articles/360027461274-How-to-find-a-Slack-user-ID). Don't forget to commit the action with the new member and tag a new release!
