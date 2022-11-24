@@ -1,7 +1,7 @@
 name: 'Resolve slack committer username'
 description: 'Get the slack username of the current committer'
 inputs:
-  USER_MAPPING:
+  user-mapping:
     description: 'JSON mapping of github username to slack user IDs (see https://www.workast.com/help/article/how-to-find-a-slack-user-id/ )'
     required: true
 outputs:
