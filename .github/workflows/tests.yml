@@ -12,8 +12,7 @@ jobs:
         id: committer
         uses: ./
         with:
-          user-mapping: "{\"Penchef\":\"FOO\",\"default\":\"Bar\"}"
+          user-mapping: "{\"Penchef\":\"@FOO\",\"default\":\"#Bar\"}"
           # payload: "{\"key\":\"value\",\"foo\":\"bar\"}"
       - name: verify
         run: echo ${{ steps.committer.outputs.username }}
-
