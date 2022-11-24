@@ -7,7 +7,7 @@ const github = require('@actions/github');
 try {
     const committer = github.context.actor?.toLowerCase();
 
-    const inputJSON = JSON.stringify(core.getInput('user-mapping'));
+    const inputJSON = JSON.parse(core.getInput('user-mapping'));
     console.log('bar', inputJSON)
     const githubToSlackId = new Map(Object.entries(inputJSON).map(([key, value]) => ([key.toLocaleLowerCase(), value])))
 
