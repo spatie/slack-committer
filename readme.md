@@ -14,7 +14,7 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
   id: slack-committer
   uses: penchef/slack-committer@v1
     with:
-    # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no
+    # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no user was found.
     user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
     # user-mapping:  "{\"Penchef\":\"UUSAQBVDZ\",\"fallback\":\"XYZXYZXYZ\"}"
 ```
@@ -34,7 +34,7 @@ Later in your workflow:
   if: always()
   uses: voxmedia/github-action-slack-notify-build@v1.5.0
   with:
-    channel_id: ${{ steps.slack-committer.outputs.username }}"
+    channel_id: ${{ steps.slack-committer.outputs.username }}
     status: FAILED
     color: danger
 #...

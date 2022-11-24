@@ -8,11 +8,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: yarn install
-      - name: Determine committer
-        id: committer
-        uses: ./
+      - name: read users.json
+        id: read-users
+        run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
+      - name: Resolve slack committer
+        id: slack-committer
+        uses: penchef/slack-committer@v1
         with:
-          user-mapping: '{"foo":"FOO","fallback":"Bar"}'
-          # payload: "{\"key\":\"value\",\"foo\":\"bar\"}"
-      - name: verify
-        run: echo "${{ steps.committer.outputs.username }}"
+          # JSON mapping from Github user to slack userID or channelID.
+          user-mapping: ${{ steps.read-users.outputs.users }}"
+      - run: echo ${{ steps.slack-committer.outputs.username }}
