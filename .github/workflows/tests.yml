@@ -15,4 +15,4 @@ jobs:
           user-mapping: "{\"Penchef\":\"@FOO\",\"default\":\"#Bar\"}"
           # payload: "{\"key\":\"value\",\"foo\":\"bar\"}"
       - name: verify
-        run: echo ${{ steps.committer.outputs.username }}
+        run: echo "${{ steps.committer.outputs.username }}"
