@@ -3,7 +3,7 @@
 
 # Slack committer action
 
-This action transforms the committer of the current commit into a slack friendly @name so the Spatie team member will be mentioned. When a non-Spatie member commits, the action will use the committers GitHub username.
+This action transforms the github committer of the current commit into a slack userID or channelID. The mapping provided as JSON. The "fallback" is used when no user can be determined. The github username look up ignores cases.
 
 ## Example usage
 
@@ -13,7 +13,7 @@ This action transforms the committer of the current commit into a slack friendly
   uses: penchef/slack-committer@main
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no
-    user-mapping: '{"penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
+    user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
 ```
 
 Later in your workflow:
@@ -44,6 +44,3 @@ Later in your workflow:
     args: '{\"channel\":\"${{ steps.slack-committer.outputs.username }}"\",\"text\":\"Hello world\"}'
 ```
 
-## Adding a new team member
-
-You can add a new team member by updating the `index.js` file. You'll need a Slack user id next to the name of the team member, that id can be found as [such](https://help.workast.com/hc/en-us/articles/360027461274-How-to-find-a-Slack-user-ID). Don't forget to commit the action with the new member and tag a new release!
