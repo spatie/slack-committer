@@ -8,21 +8,40 @@ This action transforms the committer of the current commit into a slack friendly
 ## Example usage
 
 ```yaml
--   name: Resolve slack committer
-    id: slack-committer
-    uses: spatie/slack-committer@1.0.0
+- name: Resolve slack committer
+  id: slack-committer
+  uses: penchef/slack-committer@main
     with:
-        USER_MAPPING: '{ "rubenvanassche": "UCK2H2Z6V" }'
+    # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no
+    user-mapping: '{"penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
 ```
 
 Later in your workflow:
 
 ```yml
--   name: Slack Notification
-    uses: rtCamp/action-slack-notify@master
-    env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-        SLACK_MESSAGE: "You should fix this: ${{ steps.slack-committer.outputs.username }}"
+- name: Slack Notification
+  uses: penchef/action-slack-notify@main
+  env:
+    SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+    SLACK_MESSAGE: "You should fix this: ${{ steps.slack-committer.outputs.username }}"
+#...
+- name: Notify slack fail
+  env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+  if: always()
+  uses: voxmedia/github-action-slack-notify-build@v1.5.0
+  with:
+    channel_id: ${{ steps.slack-committer.outputs.username }}"
+    status: FAILED
+    color: danger
+#...
+- name: Notify slack
+  if: always()
+  env:
+    SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+  uses: pullreminders/slack-action@master
+  with:
+    args: '{\"channel\":\"${{ steps.slack-committer.outputs.username }}"\",\"text\":\"Hello world\"}'
 ```
 
 ## Adding a new team member
