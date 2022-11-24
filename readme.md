@@ -5,12 +5,14 @@
 
 This action transforms the github committer of the current commit into a slack userID or channelID. The mapping provided as JSON. The "fallback" is used when no user can be determined. The github username look up ignores cases.
 
+Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
+
 ## Example usage
 
 ```yaml
 - name: Resolve slack committer
   id: slack-committer
-  uses: penchef/slack-committer@main
+  uses: penchef/slack-committer@v1
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no
     user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
@@ -20,7 +22,7 @@ Later in your workflow:
 
 ```yml
 - name: Slack Notification
-  uses: penchef/action-slack-notify@main
+  uses: rtCamp/action-slack-notify@v2
   env:
     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     SLACK_MESSAGE: "You should fix this: ${{ steps.slack-committer.outputs.username }}"
