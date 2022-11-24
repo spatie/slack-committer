@@ -1,16 +1,16 @@
-name: Test
+name: Release
 on:
   push:
     branches:
       - main
 jobs:
-  test:
+  release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: yarn install
       - name: update v1 tag
         if: ${{ endsWith(github.ref, '/main') }}
-        run: 'git push -f https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v1'
+        run: 'git push -f https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git HEAD:refs/heads/v1.1'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

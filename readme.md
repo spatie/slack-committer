@@ -12,7 +12,7 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
 ```yaml
 - name: Resolve slack committer
   id: slack-committer
-  uses: penchef/slack-committer@v1
+  uses: penchef/slack-committer@v1.1
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no user was found.
     user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
