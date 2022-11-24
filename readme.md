@@ -16,6 +16,7 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no
     user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
+    # user-mapping:  "{\"Penchef\":\"UUSAQBVDZ\",\"fallback\":\"XYZXYZXYZ\"}"
 ```
 
 Later in your workflow:
