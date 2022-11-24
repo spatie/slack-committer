@@ -1,7 +1,7 @@
 name: 'Resolve github user to slack userID or channelID'
 description: 'Get the slack username of the current committer'
 branding:
-  icon: "slack"
+  icon: "message-square"
   color: "purple"
 inputs:
   user-mapping:
