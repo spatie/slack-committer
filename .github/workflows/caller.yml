@@ -7,6 +7,9 @@ jobs:
     steps:
       - name: Failing step
         run: exit 1
+  # the call to the reuseable workflow has to occur at the "jobs" level
+  # the call cannot be made from a "step",
+  # see https://docs.github.com/en/actions/using-workflows/reusing-workflows#calling-a-reusable-workflow
   notify:
     needs: [do-something]
     if: failure()

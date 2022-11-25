@@ -1,4 +1,4 @@
-name: 'Resolve github user to slack userID or channelID'
+name: 'Resolve slack user'
 description: 'Get the slack username of the current committer'
 branding:
   icon: "message-square"

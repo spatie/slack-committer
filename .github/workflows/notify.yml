@@ -1,4 +1,9 @@
 name: Notify Committer Re-useable workflow
+# IMPORTANT NOTE:
+#       this workflow either has to be in the same repository as the calling workflow OR
+#       this workflow needs to reside in a public repository. Github doesn't now allow the
+#       reuse of workflows residing in a private repository.
+#       See also https://docs.github.com/en/actions/using-workflows/reusing-workflows#limitations
 on:
   workflow_call:
     inputs:
@@ -21,7 +26,8 @@ jobs:
         uses: penchef/slack-committer@v1.2
         with:
           user-mapping: ${{ steps.read-users.outputs.users }}
-      - name: Notify slack fail
+      - name: Notify user
+        # choose whatever notify action suits you, using voxmedia/github-action-slack-notify-build as an example
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
         if: ${{ inputs.failure }}
