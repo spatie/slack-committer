@@ -16,5 +16,5 @@ jobs:
         uses: penchef/slack-committer@main
         with:
           # JSON mapping from Github user to slack userID or channelID.
-          user-mapping: ${{ steps.read-users.outputs.users }}"
+          user-mapping: ${{ steps.read-users.outputs.users }}
       - run: echo ${{ steps.slack-committer.outputs.username }}
