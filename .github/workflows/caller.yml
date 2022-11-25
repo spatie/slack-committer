@@ -7,6 +7,7 @@ on:
         description: 0 or 1
         required: false
         type: string
+        default: "1"
 jobs:
   test:
     runs-on: ubuntu-latest
