@@ -1,8 +1,12 @@
 name: Notify Committer
 on:
   workflow_call:
+    inputs:
+      failure:
+        required: true
+        type: boolean
     secrets:
-      envPAT:
+      SLACK_BOT_TOKEN:
         required: true
 jobs:
   notify:
@@ -19,8 +23,8 @@ jobs:
           user-mapping: ${{ steps.read-users.outputs.users }}
       - name: Notify slack fail
         env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
-        if: always() # failure()
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        if: ${{ inputs.failure }}
         uses: voxmedia/github-action-slack-notify-build@v1.5.0
         with:
           channel_id: ${{ steps.slack-committer.outputs.username }}

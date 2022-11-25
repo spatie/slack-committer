@@ -2,6 +2,11 @@ name: Test
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      status:
+        description: 0 or 1
+        required: false
+        type: string
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -15,6 +20,12 @@ jobs:
         id: slack-committer
         uses: penchef/slack-committer@v1.2
         with:
-          # JSON mapping from Github user to slack userID or channelID.
           user-mapping: ${{ steps.read-users.outputs.users }}
       - run: echo ${{ steps.slack-committer.outputs.username }}
+      - run: exit ${{  inputs.status  }}
+      - name: Notify committer
+        uses: penchef/slack-committer/.github/workflows/notify.yml@main
+        with:
+          failure: failure()
+          secrets: inherit
+
