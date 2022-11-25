@@ -3,7 +3,9 @@
 
 # Slack committer action
 
-This action transforms the github committer of the current commit into a slack userID or channelID. The mapping provided as JSON. The "fallback" is used when no user can be determined. The github username look up ignores cases.
+This action transforms the github committer of the current commit into a slack [userID](https://www.workast.com/help/article/how-to-find-a-slack-user-id/) or [channelID](https://help.socialintents.com/article/148-how-to-find-your-slack-team-id-and-slack-channel-id).
+
+The mapping provided as JSON. The "fallback" is used when no user can be determined. The github username look up ignores cases.
 
 Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
 
@@ -61,4 +63,19 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
   with:
     args: '{\"channel\":\"${{ steps.slack-committer.outputs.username }}"\",\"text\":\"Hello world\"}'
 ```
+
+## Advance usage:
+
+In order to avoid repetition, one can combine the three steps
+
+1. read user.json
+2. determine slack username
+3. notify committer
+
+within one reusable workflow
+
+1. create a new re-usable workflow by copying [notify.yml](./.github/workflows/notify.yml), either within the repo you want to use it or within a public repository. See also [re-useable workflow limitation](https://docs.github.com/en/actions/using-workflows/reusing-workflows#limitations)
+2. create a github user mapping JSON, e.g. [users.json](users.json).
+3. create a new job within the workflow you want to report on, e.g. see [caller.yml](.github/workflows/caller.yml)
+
 
