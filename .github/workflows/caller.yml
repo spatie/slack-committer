@@ -1,42 +1,17 @@
-name: Re-use notifier workflow
+name: Re-use notify.yml workflow
 on:
   pull_request:
-  workflow_dispatch:
-    inputs:
-      status:
-        description: 0 or 1
-        required: false
-        type: string
-        default: "1"
 jobs:
-  test:
+  do-something:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: yarn install
-      - name: read users.json
-        id: read-users
-        run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
-      - name: Resolve slack committer
-        id: slack-committer
-        uses: penchef/slack-committer@v1.2
-        with:
-          user-mapping: ${{ steps.read-users.outputs.users }}
-      - run: echo ${{ steps.slack-committer.outputs.username }}
-      - run: exit ${{  inputs.status  }}
-      - name: Notify slack fail
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        uses: voxmedia/github-action-slack-notify-build@v1.5.0
-        with:
-          channel_id: UUSAQBVDZ
-          status: FAILED
-          color: danger
+      - name: Failing step
+        run: exit 1
   notify:
-    needs: [test]
+    needs: [do-something]
     if: failure()
     uses: penchef/slack-committer/.github/workflows/notify.yml@main
     secrets: inherit
     with:
-      failure: true
+      failure: ${{ jobs.do-something.results == 'failure' }}
 

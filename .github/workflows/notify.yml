@@ -1,4 +1,4 @@
-name: Notify Committer
+name: Notify Committer Re-useable workflow
 on:
   workflow_call:
     inputs:
