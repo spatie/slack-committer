@@ -42,7 +42,7 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
   env:
     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
     SLACK_MESSAGE: "You should fix this: ${{ steps.slack-committer.outputs.username }}"
-#...
+# OR
 - name: Notify slack fail
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
@@ -52,7 +52,7 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
     channel_id: ${{ steps.slack-committer.outputs.username }}
     status: FAILED
     color: danger
-#...
+# OR
 - name: Notify slack
   if: always() # failure()
   env:
