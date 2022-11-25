@@ -1,0 +1,28 @@
+name: Notify Committer
+on:
+  workflow_call:
+    secrets:
+      envPAT:
+        required: true
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: read users.json
+        id: read-users
+        run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
+      - name: Resolve slack committer
+        id: slack-committer
+        uses: penchef/slack-committer@v1.2
+        with:
+          user-mapping: ${{ steps.read-users.outputs.users }}
+      - name: Notify slack fail
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
+        if: always() # failure()
+        uses: voxmedia/github-action-slack-notify-build@v1.5.0
+        with:
+          channel_id: ${{ steps.slack-committer.outputs.username }}
+          status: FAILED
+          color: danger
