@@ -1,7 +1,12 @@
-name: Test
+name: Re-use notifier workflow
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      status:
+        description: 0 or 1
+        required: false
+        type: string
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -17,3 +22,12 @@ jobs:
         with:
           user-mapping: ${{ steps.read-users.outputs.users }}
       - run: echo ${{ steps.slack-committer.outputs.username }}
+      - run: exit ${{  inputs.status  }}
+  notify:
+    needs: [test]
+    if: failure()
+    uses: penchef/slack-committer/.github/workflows/notify.yml@main
+    with:
+      failure: failure()
+      secrets: inherit
+
