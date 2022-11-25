@@ -28,6 +28,6 @@ jobs:
     if: failure()
     uses: penchef/slack-committer/.github/workflows/notify.yml@main
     with:
-      failure: failure()
+      failure: ${{ failure() }}
       secrets: inherit
 
