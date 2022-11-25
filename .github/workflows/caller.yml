@@ -13,5 +13,5 @@ jobs:
     uses: penchef/slack-committer/.github/workflows/notify.yml@main
     secrets: inherit
     with:
-      failure: ${{ do-something.results == 'failure' }}
+      failure: ${{ needs.do-something.results == 'failure' }}
 
