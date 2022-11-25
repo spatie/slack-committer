@@ -31,13 +31,13 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
   uses: penchef/slack-committer@v1.2
   with:
     user-mapping: ${{ steps.read-users.outputs.users }}
-- run: echo ${{ steps.slack-committer.outputs.username }}
 ```
 
-Later in your workflow:
+## Later in your workflow:
 
 ```yml
 - name: Slack Notification
+  if: always() # failure()
   uses: rtCamp/action-slack-notify@v2
   env:
     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
@@ -46,7 +46,7 @@ Later in your workflow:
 - name: Notify slack fail
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
-  if: always()
+  if: always() # failure()
   uses: voxmedia/github-action-slack-notify-build@v1.5.0
   with:
     channel_id: ${{ steps.slack-committer.outputs.username }}
@@ -54,7 +54,7 @@ Later in your workflow:
     color: danger
 #...
 - name: Notify slack
-  if: always()
+  if: always() # failure()
   env:
     SLACK_BOT_TOKEN: ${{ secrets.SLACK_TOKEN }}
   uses: pullreminders/slack-action@master
