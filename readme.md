@@ -7,16 +7,31 @@ This action transforms the github committer of the current commit into a slack u
 
 Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
 
-## Example usage
+## Example usage with JSON provided as string
 
 ```yaml
-- name: Resolve slack committer
+- name: Resolve slack committer with JSON provided as string
   id: slack-committer
   uses: penchef/slack-committer@v1.2
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no user was found.
     user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
+    # OR
     # user-mapping:  "{\"Penchef\":\"UUSAQBVDZ\",\"fallback\":\"XYZXYZXYZ\"}"
+```
+
+## Example usage with JSON provided as users.json file
+
+```yaml
+- name: Resolve slack committer with JSON provided as users.json file
+  id: read-users
+  run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
+- name: Resolve slack committer
+  id: slack-committer
+  uses: penchef/slack-committer@v1.2
+  with:
+    user-mapping: ${{ steps.read-users.outputs.users }}
+- run: echo ${{ steps.slack-committer.outputs.username }}
 ```
 
 Later in your workflow:
