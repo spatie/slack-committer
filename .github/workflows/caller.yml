@@ -23,6 +23,14 @@ jobs:
           user-mapping: ${{ steps.read-users.outputs.users }}
       - run: echo ${{ steps.slack-committer.outputs.username }}
       - run: exit ${{  inputs.status  }}
+      - name: Notify slack fail
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: voxmedia/github-action-slack-notify-build@v1.5.0
+        with:
+          channel_id: UUSAQBVDZ
+          status: FAILED
+          color: danger
   notify:
     needs: [test]
     if: failure()
