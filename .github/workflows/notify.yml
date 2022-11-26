@@ -18,14 +18,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: read users.json
-        id: read-users
-        run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
       - name: Resolve slack committer
         id: slack-committer
         uses: penchef/slack-committer@v1.2
         with:
-          user-mapping: ${{ steps.read-users.outputs.users }}
+          user-mapping: >
+            {
+              "Penchef": "UUSAQBVDZ",
+              "fallback": "XYZXYZXYZ"
+            }
       - name: Notify user
         # choose whatever notify action suits you, using voxmedia/github-action-slack-notify-build as an example
         env:
