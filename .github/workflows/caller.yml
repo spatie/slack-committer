@@ -18,6 +18,7 @@ jobs:
     with:
       failure: true
   debug:
+    runs-on: ubuntu-latest
     steps:
       - name: foo
         env:
