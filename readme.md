@@ -26,6 +26,8 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
 
 ## Example usage with JSON provided as users.json file
 
+Note: this won't work with reusable workflows.
+
 ```yaml
 - name: Resolve slack committer with JSON provided as users.json file
   id: read-users
@@ -70,9 +72,8 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
 
 In order to avoid repetition, one can combine the three steps
 
-1. read user.json
-2. determine slack username
-3. notify committer
+1. determine slack username
+2. notify committer
 
 within one reusable workflow
 

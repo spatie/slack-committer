@@ -10,7 +10,7 @@ jobs:
       - run: yarn install
       - name: read users.json
         id: read-users
-        run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
+        run: echo "users=$(jq . users.json) >> $GITHUB_OUTPUT"
       - name: Resolve slack committer with users.json
         id: slack-committer
         uses: penchef/slack-committer@v1.2
