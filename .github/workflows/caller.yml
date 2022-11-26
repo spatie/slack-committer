@@ -17,15 +17,3 @@ jobs:
     secrets: inherit
     with:
       failure: true
-  debug:
-    runs-on: ubuntu-latest
-    needs: [ do-something ]
-    if: ${{ always() }}
-    steps:
-      - name: foo
-        env:
-          FOO: ${{ contains(needs.*.result, 'failure')  }}
-          BAR: ${{ contains(needs.*.result, 'skipped') }}
-        run: |
-          echo "FOO $FOO"
-          echo "BAR $BAR"
