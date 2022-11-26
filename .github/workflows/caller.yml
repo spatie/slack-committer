@@ -17,3 +17,12 @@ jobs:
     secrets: inherit
     with:
       failure: true
+  debug:
+    steps:
+      - name: foo
+        env:
+          FOO: ${{ contains(needs.*.result, 'failure')  }}
+          BAR: ${{ contains(needs.*.result, 'skipped') }}
+        run: |
+          echo "FOO $FOO"
+          echo "BAR $BAR"
