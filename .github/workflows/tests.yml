@@ -11,9 +11,20 @@ jobs:
       - name: read users.json
         id: read-users
         run:  echo users=$(jq . users.json) >> $GITHUB_OUTPUT
-      - name: Resolve slack committer
+      - name: Resolve slack committer with users.json
         id: slack-committer
         uses: penchef/slack-committer@v1.2
         with:
           user-mapping: ${{ steps.read-users.outputs.users }}
       - run: echo ${{ steps.slack-committer.outputs.username }}
+      - name: Resolve slack committer
+        id: slack-committer-string
+        uses: penchef/slack-committer@v1.2
+        with:
+          user-mapping: >
+            {
+              "Penchef": "UUSAQBVDZ",
+              "fallback": "XYZXYZXYZ"
+            }
+      - run: echo ${{ steps.slack-committer-string.outputs.username }}
+

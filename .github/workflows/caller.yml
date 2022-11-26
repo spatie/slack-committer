@@ -11,10 +11,9 @@ jobs:
   # the call cannot be made from a "step",
   # see https://docs.github.com/en/actions/using-workflows/reusing-workflows#calling-a-reusable-workflow
   notify:
-    needs: [do-something]
-    if: failure()
+    needs: [ do-something ]
+    if: ${{ always() && ( contains(needs.*.result, 'failure') || contains(needs.*.result, 'skipped') ) }}
     uses: penchef/slack-committer/.github/workflows/notify.yml@main
     secrets: inherit
     with:
-      failure: ${{ needs.do-something.result == 'failure' }}
-
+      failure: true

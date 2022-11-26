@@ -17,9 +17,11 @@ Based on [spatie/slack-committer](https://github.com/spatie/slack-committer)
   uses: penchef/slack-committer@v1.2
     with:
     # JSON mapping from Github user to slack userID or channelID. "fallback" is used when no user was found.
-    user-mapping: '{"Penchef":"UUSAQBVDZ","fallback":"XYZXYZXYZ"}'
-    # OR
-    # user-mapping:  "{\"Penchef\":\"UUSAQBVDZ\",\"fallback\":\"XYZXYZXYZ\"}"
+    user-mapping: >
+      {
+        "Penchef": "UUSAQBVDZ",
+        "fallback": "XYZXYZXYZ"
+      }
 ```
 
 ## Example usage with JSON provided as users.json file
