@@ -12,6 +12,8 @@ const mapping = new Map([
     ['riasvdv', 'UJA4K0423'],
     ['Nielsvanpach', 'U01AEH489NX'],
     ['LukeAbell', 'U0C7C8E3G'],
+    ['Sam-Apostel', 'U03M8AUFG0K'],
+    ['timvandijck', 'U04P44DCYPQ'],
 ])
 
 try {
