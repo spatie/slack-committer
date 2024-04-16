@@ -4,5 +4,5 @@ outputs:
     username:
         description: 'The slack username of the committer'
 runs:
-    using: 'node12'
+    using: 'node20'
     main: 'index.js'
