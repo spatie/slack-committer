@@ -1,6 +1,3 @@
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/support-ukraine.svg?t=1" />](https://supportukrainenow.org)
-
 # Slack committer action
 
 This action transforms the committer of the current commit into a slack friendly @name so the Spatie team member will be mentioned. When a non-Spatie member commits, the action will use the committers GitHub username.
